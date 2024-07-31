@@ -9,6 +9,7 @@ from sidebar import render_sidebar
 from page1 import render_page1
 from page2 import render_page2
 from page3 import render_page3
+from page4 import render_page4
 
 st.set_page_config(
     page_title="Pró-Corpo Labs Reports CRM",
@@ -19,7 +20,7 @@ st.set_page_config(
 
 alt.themes.enable("ggplot2")
 
-# Carrega o CSV
+# Carregando o CSV tratado
 df_lojas_anos_e_mes = pd.read_csv('G:\\Meu Drive\\LUIS\\WORK\\18digital\\pro-corpo\\Lab Programação\\projeto_dashboard_historico/df_lojas_ano_e_mes.csv')
 
 # Lista de lojas válidas
@@ -37,10 +38,12 @@ df_lojas_anos_e_mes = df_lojas_anos_e_mes[df_lojas_anos_e_mes['Unidade'].isin(li
 # Sidebar
 page, selected_years, selected_stores, selected_color_theme, df_filtered_sorted = render_sidebar(df_lojas_anos_e_mes)
 
-# Pages
+# Controle das páginas
 if page == "1 - Funil":
     render_page1(selected_years, selected_stores, selected_color_theme, df_filtered_sorted)
 elif page == "2 - Leads":
     render_page2()
 elif page == "3 - Leags Pagos":
     render_page3()
+elif page == "4 - Leags x Agenda":
+    render_page4()

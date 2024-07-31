@@ -4,11 +4,15 @@ def render_sidebar(df_lojas_anos_e_mes):
 
     st.sidebar.title('Pró-Corpo Lab')
     st.sidebar.markdown('### Relatórios')
+    
+    # Seleção de páginas
     page = st.sidebar.radio("", ["1 - Funil",
                                   "2 - Leads",
-                                  "3 - Leags Pagos"
+                                  "3 - Leags Pagos",
+                                  "4 - Leags x Agenda"
                                   ], index=0)
 
+    # Filtros disponíveis para interaçaõ
     st.sidebar.markdown('### Filtros')
     year_list = list(df_lojas_anos_e_mes['ano'].unique())[::-1]
     stores_list = list(df_lojas_anos_e_mes['Unidade'].unique())[::-1]

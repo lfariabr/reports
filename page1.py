@@ -5,6 +5,7 @@ def render_page1(selected_years, selected_stores, selected_color_theme, df_filte
     st.markdown('# FUNIL')
     st.markdown('##### Aqui temos a visão geral do funil para loja e período selecionado!')
 
+    # Primeira div exibindo resumo e tabela raw data
     col1, col2 = st.columns(2)
 
     with col1:
@@ -51,6 +52,7 @@ def render_page1(selected_years, selected_stores, selected_color_theme, df_filte
 
     df_yearly_totals = df_filtered_sorted.groupby('ano').sum().reset_index()
 
+    # Segunda div, exibindo gráfico colunas agrupando leads/ano
     st.markdown("## Visão por Ano")
 
     fig_leads_ano = px.bar(df_yearly_totals, x='ano', y='Leads', color='Leads', color_continuous_scale=selected_color_theme, title='Leads')
@@ -58,7 +60,8 @@ def render_page1(selected_years, selected_stores, selected_color_theme, df_filte
     fig_comparecimentos_ano = px.bar(df_yearly_totals, x='ano', y='Comparecimentos', color='Comparecimentos', color_continuous_scale=selected_color_theme, title='Comparecimentos')
 
     st.plotly_chart(fig_leads_ano)
-
+    
+    # Terceira div, exibindo gráfico colunas agrupando agendamentos e comparecimentos/ano
     col1, col2 = st.columns(2)
     with col1:
         st.plotly_chart(fig_agendamentos_ano)
@@ -66,7 +69,8 @@ def render_page1(selected_years, selected_stores, selected_color_theme, df_filte
         st.plotly_chart(fig_comparecimentos_ano)
 
     df_monthly_totals = df_filtered_sorted.groupby('mes_ano').sum().reset_index()
-
+    
+    # Quarta div, exibindo gráfico colunas agrupando leads/mes_ano
     st.markdown("## Visão por Mês")
     fig_leads_mes = px.bar(df_monthly_totals, x='mes_ano', y='Leads', color='Leads', color_continuous_scale=selected_color_theme, title='Leads')
     fig_agendamentos_mes = px.bar(df_monthly_totals, x='mes_ano', y='Agendamentos', color='Agendamentos', color_continuous_scale=selected_color_theme, title='Agendamentos')
@@ -74,6 +78,7 @@ def render_page1(selected_years, selected_stores, selected_color_theme, df_filte
 
     st.plotly_chart(fig_leads_mes)
 
+    # Quinta div, exibindo gráfico colunas agrupando leads/mes_ano
     col1, col2 = st.columns(2)
     with col1:
         st.plotly_chart(fig_agendamentos_mes)
